@@ -11,19 +11,18 @@ module.exports = BaseController.extend({
 					res.send('Conflict', 409);
 				} else { next(err);}
 				return;
-			}
-			
-
+			} 
 		});
+		return true;
 	},
 	fetchPerson: function(req, res, next){
 		var person = Person.findOne(
 			{name: req.params.name}, function(err){
 				if(err){
 					console.log("No user");
-				}
-				res.json(wrap(person));
+				}			
 		});
+		if (person) return person;
 	}
 
 });
