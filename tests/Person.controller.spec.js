@@ -1,5 +1,5 @@
-describe("Person controller", function(){
-	var PersonController = require("../controllers/Person")
+describe("Person controller", function(){                              
+	var PersonController = require("../controllers/Person");
 	var PersonModel = require("../data/models/Person.model");
 
 	describe("Create functionality", function(){
@@ -9,12 +9,13 @@ describe("Person controller", function(){
 					name: "Testing",
 					FBToken: "nanaana"
 				}
-			}
+			};
 			var res = {};
-			var Mext =  function(){};
-			var response = PersonController
-									.createPerson(req, res, Mext);
-			expect(response).toBe(true);
+			var done =  function(){};
+			PersonController.createPerson(req, res, done);
+			var result = PersonModel.findOne({ 
+				name : "Testing" }); 
+			expect(result).toBeTruthy();
 			next();
 		});
 
@@ -24,16 +25,17 @@ describe("Person controller", function(){
 		it("should return result from query", function(next){
 			var req = {
 				params: {
-					name: "Testing'"
+					name: "Testing"
 				}
-			}
+			};
 			var res = {};
 			var done = function(){};
 			var result = PersonController.fetchPerson(req, res, done);
-			expect(result).toBeTruthy();
+			
+			expect(req.person).toBeDefined();
 			next();
-		})
-	})
+		});
+	});
 
 	
 
