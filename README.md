@@ -1,2 +1,2 @@
-zpay
+Payments Mark 2 
 ====
