@@ -6,10 +6,10 @@
 var Person = require('../controllers/Person');
 
 module.exports = function(app) {
-	app.post('/test', function(req, res, next){
+	app.post('/people/new', function(req, res, next){
 		Person.createPerson(req, res, next);
 	});
-	app.get('/test/:name', function(req, res, next){
+	app.get('/people/:id', function(req, res, next){
 		Person.fetchPerson(req, res, next);
-	})
+	});
 }
