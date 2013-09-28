@@ -9,7 +9,7 @@ module.exports = function(app) {
 	app.post('/people/new', function(req, res, next){
 		Person.createPerson(req, res, next);
 	});
-	app.get('/people/:id', function(req, res, next){
+	app.get('/people/:email', function(req, res, next){
 		Person.fetchPerson(req, res, next);
 	});
 }

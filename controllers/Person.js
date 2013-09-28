@@ -15,7 +15,7 @@ module.exports = BaseController.extend({
 	},
 	fetchPerson: function(req, res, next){
 		var person = Person.findOne({
-				name : req.params.name }, function(err, person){
+				email : req.params.email }, function(err, person){
 				if(err) {
 					return next(err);
 				}

@@ -8,6 +8,7 @@ describe("Person model", function(){
 	describe("Create functionality", function(){
 		beforeEach(function() {
 			person = PersonModel({
+				
 				name: "ImanIdiot",
 				FBToken: "nanana",
 				APIToken: "nanana"

@@ -6,6 +6,7 @@ describe("Person controller", function(){
 		it("should create a new Person", function(next){
 			var req = {
 				body: {
+					email: "diego@d.com",
 					name: "Testing",
 					FBToken: "nanaana"
 				}
