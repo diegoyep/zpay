@@ -6,15 +6,29 @@ describe("Authentication functionality", function() {
 	describe("Facebook authentication", function(){
 		var fbRoute = "/facebook/callback";
 		it("should exist ", function(next){
-			request.get(route + fbRoute, function(err, response, body){
+			request.post(route + fbRoute, function(err, response, body){
 				expect(response.statusCode).toEqual(200);
 				next(); 
 			});
 		}); 
 
 		it("should respond with json string", function(next){
-			request.get(route + fbRoute, function(err, response, body){
-				expect(typeof(body)).toBe(typeof(""));
+			request.post(route + fbRoute, function(err, response, body){
+				expect(typeof(JSON.parse(body))).toBe(typeof({}));
+				next();
+			});
+		});
+
+		it("should have success information", function(next){
+			request.post(route + fbRoute, function(err, response, body) {
+				expect(JSON.parse(body).success).toBeDefined(); 
+				next();
+			});
+		});
+
+		it("should have data information", function(next){
+			request.post(route + fbRoute, function(err, response, body) {
+				expect(JSON.parse(body).data).toBeDefined();
 				next();
 			});
 		});

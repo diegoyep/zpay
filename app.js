@@ -7,6 +7,8 @@ var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var dbURL = 'mongodb://localhost/test';
+var db = require('mongoose').connect(dbURL);
 
 
 var app = express();
