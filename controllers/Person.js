@@ -1,5 +1,6 @@
 var BaseController = require("./Base"),
-	Person = require("../data/models/Person");
+	Person = require("../data/models/Person"),
+	hat = require('hat');
 
 module.exports = BaseController.extend({
 	name: "Person",
@@ -27,11 +28,50 @@ module.exports = BaseController.extend({
 	// 	next();;
 	// },
 	findOrCreate: function(req ,res, next){
-		Person.findOne({
-			FBToken: "nanana2"
-		}, function(err, person){
-			res.json(person);
-		});
+		if(req.body.id){
+			Person.findOne({
+				id: req.body.id
+			}, function(err, person){
+				var response ={} ;
+				var profile = req.body;
+				if(err) {
+					response.success = false;
+					response.data = [];
+					res.json(response);
+				} 
+				if(!person){
+					var apiToken = hat();
+					var newPerson = new Person({
+						id: profile.id,
+						displayName: profile.displayName,
+						email: profile.emails.value,
+						profilePic: profile.photos.value,
+						FBToken: profile.accessToken,
+						APIToken: apiToken,
+						provider : profile.provider
+					});
+					newPerson.save(function(err){
+						if(err){
+							response.success = false;
+							response.data = [];
+							res.json(response);
+						}
+					});
+					response.success = true;
+					response.data = [newPerson];
+					res.json(response);
+				}
+				response.success = true;
+				response.data = [person] ;
+				res.json(response);
+			});
+		} else {
+			
+			res.json({
+				success:false,
+				data:[]
+			});
+		}
 		
 	 }
 
