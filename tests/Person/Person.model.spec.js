@@ -1,6 +1,6 @@
 describe("Person model", function(){
 	
-	var PersonModel = require("../../data/models/Person.model");
+	var PersonModel = require("../../data/models/Person");
 
 	var person;
 	
@@ -8,8 +8,9 @@ describe("Person model", function(){
 	describe("Create functionality", function(){
 		beforeEach(function() {
 			person = PersonModel({
+				
 				name: "ImanIdiot",
-				FBToken: "nanana",
+				FBToken: "nanana2",
 				APIToken: "nanana"
 			});
 		});
